@@ -5,6 +5,20 @@ output:
   html_notebook: default
 ---
 
+Obesity in the United States has been increasingly cited as a major health issue in recent decades, resulting in diseases such as coronary heart disease that lead to mortality.While many industrialized countries have experienced similar increases, obesity rates in the United States are among the highest in the world.
+
+Obesity has continued to grow within the United States. Two out of every three Americans are considered to be overweight or obese. The United States contains one of the highest percentage of obese people in the world. Obesity has led to over 120,000 preventable deaths each year in the United States. An obese person in America incurs an average of 1,429 Dollars more in medical expenses annually.  Approximately 147 billion Dollars is spent in added medical expenses per year within the United States.This number is expected to increase approximately 1.24 billion Dollars per year until the year 2030.
+
+
+---------
+
+
+### Aim of The project
+The main aim of this project is to study the states which had the most Obese Population amongst Adults and Children as well as Teens in USA.Secondly,another objective of this project is to learn how to scrape data in R from an HTML page using __rvest__ package and generate beautiful maps using __ggplot__ and __maps__ package in R.
+
+
+--------------
+
 
 
 ####Loading the required Packages
@@ -32,9 +46,8 @@ require(mapproj)
 
 obesity<-read_html("https://en.wikipedia.org/wiki/Obesity_in_the_United_States")
 
-#html_nodes() to select a particular HTML element from the above page
-#table because we want to select a "table"
 
+#html_nodes() to select a particular HTML element from the above page
 #Converting to a R dataframe
 #xpath of the Wikipedia table data
 obesity = obesity %>%
@@ -89,9 +102,13 @@ str(states)
 
 ```
 
-----
 
-###Plotting the Most Obese Adults States
+
+--------------
+
+
+
+###Plotting the States with Most Obese Adults
 
 
 ```{r,fig.width=10,fig.height=8}
@@ -132,7 +149,13 @@ ggplot(aes(x = reorder(region,Obese.adults), y = Obese.adults),data = topstate) 
 
 The State with Highest Obese Adult Population is *__Mississippi__*.
 
-----
+
+
+-------------
+
+
+
+
 
 ####Plotting a Map for Most Obese Adult Population
 
@@ -157,4 +180,66 @@ which.min(x = statenames$Obese.adults)
 
 
 ```
+-----
 
+
+## Now Analyzing the Obese Children and Teen Population
+
+
+```{r,fig.height=8 ,fig.width=10}
+#Now Analyzing the Obese Children and Teens
+
+#Finding top 15 States with Most Obese Children and Teens
+topChild = states %>%
+      group_by(region) %>%
+      summarise(Obese.Child.and.Teens = mean(Obese.children.and.adolescents)) %>%
+      top_n(15)
+      
+#Barplot
+
+ggplot(data = topChild, aes(x = reorder(region,Obese.Child.and.Teens), y = Obese.Child.and.Teens))+
+        geom_col(color="black",fill="#6EE543",alpha=0.8) +
+        coord_flip()
+
+
+#Map for Obesity in Children 
+
+ggplot(states, aes(x = long, y = lat, group = group, fill = Obese.children.and.adolescents)) + 
+  geom_polygon(color = "white") +
+  scale_fill_gradient(name = "Percent Obese", low = "#B8D5EC", high = "#0A4B7D", guide = "colorbar", na.value="black", breaks = pretty_breaks(n = 5)) +
+  labs(title="Obesity in Children and Teens", x = "Longitude",y = "latitude") +
+  coord_map() + 
+  #adding States names to the states on the map
+  geom_text(data=statenames, aes(x = long, y = lat, label = region), size=3)
+  
+#Most Obese Children and Teens for Delaware State
+
+#Barplot
+
+ggplot(aes(x = reorder(region,Obese.children.and.adolescents),y = Obese.children.and.adolescents),
+           data = statenames) + 
+  geom_col(color="black",fill="#F43E3E",width=1)   +
+  coord_flip() + 
+  labs(x = "States", y ="Percentage of Obese Children and Teens",title="Barplot of Obese Children and Teens")
+
+  
+
+```
+
+The State with Highest Obese Teen and Children population is *__Delaware__*.
+
+
+
+
+
+-------------------------
+
+
+
+
+## Conclusion
+
+
+In this project we firstly learned to scrape data using __'rvest'__  package from wikipedia and then analyzed and visualized the States with most Obese Adult and children population.We also learned how to create beautifull maps using __'ggplot'__ and __'maps'__  packages in R.
+
+Hope you guys likes the article.
