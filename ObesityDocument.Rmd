@@ -14,3 +14,25 @@ require(mapproj)
 
 
 ```
+
+
+
+### Not Scraping the HTML page and converting it to a R Data frame
+
+
+```{r}
+#Loading the Data--------------
+
+obesity<-read_html("https://en.m.wikipedia.org/wiki/Obesity_in_India")
+
+#html_nodes() to select a particular HTML element from the above page
+#table because we want to select a "table"
+
+#Converting to a R dataframe
+obesity = obesity %>%
+  html_nodes("table") %>% 
+  .[[1]] %>%
+  html_table()
+
+```
+

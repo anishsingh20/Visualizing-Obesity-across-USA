@@ -25,3 +25,7 @@ obesity = obesity %>%
   html_table()
 
 
+head(obesity)
+
+#Cleaning the Data 
+
