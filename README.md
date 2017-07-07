@@ -8,9 +8,9 @@ This project is all about how to collect data from a webpage and to analyze or v
 ![github logo](https://github.com/anishsingh20/Visualizing-Obesity-across-USA/blob/master/plots/ObesityForAdultsMap.png)
 
 
-#### Barplot
+#### Barplot for Top 10 Most Obese Adults States in USA
 
-![github logo](https://github.com/anishsingh20/Visualizing-Obesity-across-USA/blob/master/plots/AdultaBarplot.png)
+![github logo](https://github.com/anishsingh20/Visualizing-Obesity-across-USA/blob/master/plots/Top10ObeseAdultStates.png)
 
 
 The above plots shows that the State having the Highest Adult Obese Population is Mississippi.
