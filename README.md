@@ -14,3 +14,10 @@ This project is all about how to collect data from a webpage and to analyze or v
 
 
 The above plots shows that the State having the Highest Adult Obese Population is Mississippi.
+
+
+
+
+### The percentage of Obese Children and Teen Population across USA
+
+![github logo](https://github.com/anishsingh20/Visualizing-Obesity-across-USA/blob/master/plots/ObeseChildrenMap.png)
