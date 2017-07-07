@@ -139,5 +139,14 @@ ggplot(data = topChild, aes(x = reorder(region,Obese.Child.and.Teens), y = Obese
         coord_flip()
   
 
+#Map for Obesity in Children 
 
-
+ggplot(states, aes(x = long, y = lat, group = group, fill = Obese.children.and.adolescents)) + 
+  geom_polygon(color = "white") +
+  scale_fill_gradient(name = "Percent Obese", low = "#B8D5EC", high = "#0A4B7D", guide = "colorbar", na.value="black", breaks = pretty_breaks(n = 5)) +
+  labs(title="Obesity in Children and Teens", x = "Longitude",y = "latitude") +
+  coord_map() + 
+  #adding States names to the states on the map
+  geom_text(data=statenames, aes(x = long, y = lat, label = region), size=3)
+  
+#Most Obese Children and Teens for Delaware State
