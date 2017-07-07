@@ -111,8 +111,8 @@ ggplot(states, aes(x = long, y = lat, group = group, fill = Obese.adults)) +
 
 
 #Barplot
-ggplot(aes(x = region, y =Obese.adults),data = statenames) + 
-  geom_col(width=1,color="black",fill="#7975B9",alpha=0.9) +
+ggplot(aes(x = reorder(region,Obese.adults), y =Obese.adults),data = statenames) + 
+  geom_col(width=1,color="black",fill="#7975B9",alpha=0.6) +
   coord_flip() +
   labs(x = "Percentage of Obese Adults",y="States")
 #Highest adult percentage which are Obese is in Mississipi
@@ -121,7 +121,7 @@ which.min(x = statenames$Obese.adults)
 #Connecticut is the state with least Obese Adults
 
 
-
+#------------------------------------------------------------
 
 
 #Now Analyzing the Obese Children and Teens
@@ -150,3 +150,14 @@ ggplot(states, aes(x = long, y = lat, group = group, fill = Obese.children.and.a
   geom_text(data=statenames, aes(x = long, y = lat, label = region), size=3)
   
 #Most Obese Children and Teens for Delaware State
+
+
+
+
+#Barplot
+
+ggplot(aes(x = reorder(region,Obese.children.and.adolescents),y = Obese.children.and.adolescents),
+           data = statenames) + 
+  geom_col(color="black",fill="#F43E3E",width=1)   +
+  coord_flip() + 
+  labs(x = "States", y ="Percentage of Obese Children and Teens",title="Barplot of Obese Children and Teens")
