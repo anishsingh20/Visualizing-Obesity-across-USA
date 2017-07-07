@@ -68,7 +68,7 @@ statenames = states %>%
     group = mean(group), 
     Obese.adults = mean(Obese.adults), 
     Obese.children.and.adolescents = mean(Obese.children.and.adolescents)
-  )
+  ) 
 
 
 #Data frame consisting of top 10 Most Obese Adults States 
@@ -118,7 +118,26 @@ ggplot(aes(x = region, y =Obese.adults),data = statenames) +
 #Highest adult percentage which are Obese is in Mississipi
 
 which.min(x = statenames$Obese.adults)
+#Connecticut is the state with least Obese Adults
 
 
-#For 
+
+
+
+#Now Analyzing the Obese Children and Teens
+
+#Finding top 15 States with Most Obese Children and Teens
+topChild = states %>%
+      group_by(region) %>%
+      summarise(Obese.Child.and.Teens = mean(Obese.children.and.adolescents)) %>%
+      top_n(15)
+      
+#Barplot
+
+ggplot(data = topChild, aes(x = reorder(region,Obese.Child.and.Teens), y = Obese.Child.and.Teens))+
+        geom_col(color="black",fill="#6EE543",alpha=0.8) +
+        coord_flip()
+  
+
+
 
