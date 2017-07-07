@@ -65,10 +65,15 @@ str(USdata)
 #For adults
 
 ggplot(USdata, aes(x = long, y = lat, group = group, fill = Obese.adults.x)) + 
-  geom_polygon(color = "white") +
+  geom_polygon(color = "white",show.legend = T) +
   scale_fill_gradient(name = "Percent", low = "#BFFAAA", high = "#80FB14", guide = "colorbar", na.value="black", breaks = pretty_breaks(n = 5)) +
   labs(title="Obesity in Adults for USA",x = "Longitude",y = "Latitude") +
   coord_map()
 
 
+ggplot(aes(x = State.and.District.of.Columbia, y =Obese.adults),data = obesity) + 
+  geom_col(width=1,color="black",fill="#7975B9",alpha=0.9) +
+  coord_flip() +
+  labs(x = "Percentage of Obese Adults",y="States")
+#Highest Male percentage which are Obese is in Mississipi
 
