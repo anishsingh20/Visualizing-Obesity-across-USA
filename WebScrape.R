@@ -46,6 +46,17 @@ names(obesity) = make.names(names(obesity))
 names(obesity)
 
 
+#Loading the map-----------------
+
+states = map_data("state")
+
+# create a new variable name for state
+obesity$region = tolower(obesity$State.and.District.of.Columbia)
+
+#merging the datasets
+states = merge(states, obesity, by="region", all.x=T)
+str(states)
+
 
 
 
