@@ -28,4 +28,26 @@ obesity = obesity %>%
 head(obesity)
 
 #Cleaning the Data 
+str(obesity)
+
+#removing the % and making the data numeric
+
+for(i in 2:4){
+  obesity[,i] = gsub("%", "", obesity[,i])
+  obesity[,i] = as.numeric(obesity[,i])
+}
+
+str(obesity)
+
+#Loading the Map data
+india<-map(database = "world",regions = "india", exact = F , boundary = T)
+
+india<-map_data(india ,region="india", exact= F)
+
+str(india)
+
+#Merging both datasets
+
+
+
 
