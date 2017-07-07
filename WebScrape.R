@@ -54,11 +54,21 @@ states = map_data("state")
 obesity$region = tolower(obesity$State.and.District.of.Columbia)
 
 #merging the datasets
-states = merge(states, obesity, by="region", all.x=T)
-str(states)
+USdata = merge(states, obesity, by="region", all.x=T)
+str(USdata)
 
 
 
+#Plotting the data------------------------
+
+
+#For adults
+
+ggplot(USdata, aes(x = long, y = lat, group = group, fill = Obese.adults.x)) + 
+  geom_polygon(color = "white") +
+  scale_fill_gradient(name = "Percent", low = "#BFFAAA", high = "#80FB14", guide = "colorbar", na.value="black", breaks = pretty_breaks(n = 5)) +
+  labs(title="Obesity in Adults for USA",x = "Longitude",y = "Latitude") +
+  coord_map()
 
 
 
