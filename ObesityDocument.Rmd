@@ -17,7 +17,7 @@ require(mapproj)
 
 
 
-### Not Scraping the HTML page and converting it to a R Data frame
+### Now Scraping the HTML page and converting it to a R Data frame
 
 
 ```{r}

@@ -13,16 +13,16 @@ require(mapproj)
 
 #Loading the Data--------------
 
-obesity<-read_html("https://en.m.wikipedia.org/wiki/Obesity_in_India")
+obesity<-read_html("https://en.wikipedia.org/wiki/Obesity_in_the_United_States")
 
 #html_nodes() to select a particular HTML element from the above page
 #table because we want to select a "table"
 
 #Converting to a R dataframe
 obesity = obesity %>%
-  html_nodes("table") %>% 
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/table[2]') %>% 
   .[[1]] %>%
-  html_table()
+  html_table(fill=T)
 
 
 head(obesity)
@@ -39,14 +39,14 @@ for(i in 2:4){
 
 str(obesity)
 
-#Loading the Map data
-india<-map(database = "world",regions = "india", exact = F , boundary = T)
+#Fixing the names to remove spaces
 
-india<-map_data(india ,region="india", exact= F)
+names(obesity)
+names(obesity) = make.names(names(obesity))
+names(obesity)
 
-str(india)
 
-#Merging both datasets
+
 
 
 
