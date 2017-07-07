@@ -58,7 +58,7 @@ states = merge(states, obesity, by="region", all.x=T)
 str(USdata)
 
 
-#for adding Names to the states in the Map
+#for adding Names to the states in the Map- making a new data frame
 
 statenames = states %>% 
   group_by(region) %>%
@@ -69,6 +69,27 @@ statenames = states %>%
     Obese.adults = mean(Obese.adults), 
     Obese.children.and.adolescents = mean(Obese.children.and.adolescents)
   )
+
+
+#Data frame consisting of top 10 Most Obese Adults States 
+topstate = states %>% 
+  group_by(region) %>%
+  summarise(
+    
+    Obese.adults = mean(Obese.adults), 
+    Obese.children.and.adolescents = mean(Obese.children.and.adolescents)
+    
+  ) %>%
+  arrange(desc(Obese.adults)) %>%
+  top_n(10)
+
+#Plotting the top 10 states 
+
+ggplot(aes(x = reorder(region,Obese.adults), y = Obese.adults),data = topstate) + 
+  geom_col(color="black",fill="#1EDBC2",alpha=0.6) +
+  labs(y = "Percentage of Obese Adults",x="Top 10 States") +
+  coord_flip()
+
 
 
 
@@ -85,17 +106,18 @@ ggplot(states, aes(x = long, y = lat, group = group, fill = Obese.adults)) +
   scale_fill_gradient(name = "Percent", low = "#FAB8D2", high = "#F91C74", guide = "colorbar", na.value="black", breaks = pretty_breaks(n = 5)) +
   labs(title="Obesity in Adults for USA",x = "Longitude",y = "Latitude") +
   coord_map() +
-  #adding States names to the map
+  #adding States names to the states on the map
   geom_text(data=statenames, aes(x = long, y = lat, label = region), size=3)
 
 
-ggplot(aes(x = State.and.District.of.Columbia, y =Obese.adults),data = obesity) + 
+#Barplot
+ggplot(aes(x = region, y =Obese.adults),data = statenames) + 
   geom_col(width=1,color="black",fill="#7975B9",alpha=0.9) +
   coord_flip() +
   labs(x = "Percentage of Obese Adults",y="States")
 #Highest adult percentage which are Obese is in Mississipi
 
-
+which.min(x = statenames$Obese.adults)
 
 
 #For 
