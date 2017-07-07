@@ -1,0 +1,16 @@
+---
+title: "Obesity across India"
+output: html_notebook
+---
+```{r,message=FALSE,warning=FALSE}
+require(rvest)
+#rvest is the package to scrape Web pages in R
+
+require(ggplot2)
+require(dplyr)
+require(scales)
+require(maps)
+require(mapproj)
+
+
+```
